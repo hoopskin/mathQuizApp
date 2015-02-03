@@ -1,0 +1,15 @@
+<div class="row show-grid" bgcolor="rgb(86,61,124)">
+	<div class="col-md-8">
+		<p>Math Quiz App</p>
+	</div>
+	<div class="col-md-4">
+		<p>Signed in as <%= Student.first.name %></p>
+	</div>
+</div>
+<p><%= @firstNum %>+<%= @secondNum %>=</p>
+<%= form_tag("/quiz/question3results", method: "get") do %>
+  <%= label_tag(:q, "Enter Answer:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Submit") %>
+<% end %>
+<p>Find me in app/views/quiz/question3.html.erb</p>

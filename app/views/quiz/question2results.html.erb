@@ -1,0 +1,9 @@
+<% if @userAnsweredCorrectly %>
+	<h1 class="bg-success">Correct!</h1>
+<% else %>
+	<h1 class="bg-danger">Almost...</h1>
+	<strong>You Answered: </strong><p><%= @q %></p>
+	<strong>Correct Answer: </strong><p><%= @firstNum+@secondNum %></p>
+<% end %>
+
+<a class="btn btn-default" href="/quiz/question3.html" role="button">Next Question</a>
