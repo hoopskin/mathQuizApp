@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131222633) do
+ActiveRecord::Schema.define(version: 20150203165321) do
 
   create_table "quizzes", force: :cascade do |t|
     t.integer  "firstNum"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150131222633) do
     t.boolean  "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "symbol"
   end
 
   create_table "students", force: :cascade do |t|

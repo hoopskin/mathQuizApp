@@ -6,7 +6,7 @@
 		<p>Signed in as <%= Student.first.name %></p>
 	</div>
 </div>
-<p><%= @firstNum %>+<%= @secondNum %>=</p>
+<p><%= @firstNum %><%= @symbol %><%= @secondNum %>=</p>
 <%= form_tag("/quiz/question2results", method: "get") do %>
   <%= label_tag(:q, "Enter Answer:") %>
   <%= text_field_tag(:q) %>

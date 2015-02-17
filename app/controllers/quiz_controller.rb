@@ -6,8 +6,8 @@ class QuizController < ApplicationController
   end
 
   def question1
-    #rndNum = Random.new()
-    rndNum = Random.new(42)
+    rndNum = Random.new()
+    #rndNum = Random.new(42)
     @userAnswer = -1
 
   	#Clear out Quiz
@@ -17,6 +17,14 @@ class QuizController < ApplicationController
     q1 = Quiz.new
     q1.firstNum = rndNum.rand(23..29)
     q1.secondNum = rndNum.rand(6..9)
+    @symbol = ""
+    if rndNum.rand(0..1) == 1
+      @symbol = "+"
+    else
+      @symbol = "-"
+    end
+    
+    q1.symbol = @symbol
     q1.attempted = false
     q1.correct = false
     q1.save
@@ -25,6 +33,14 @@ class QuizController < ApplicationController
     q2 = Quiz.new
     q2.firstNum = rndNum.rand(23..29)
     q2.secondNum = rndNum.rand(6..9)
+
+    if rndNum.rand(0..1) == 1
+      @symbol = "+"
+    else
+      @symbol = "-"
+    end
+
+    q2.symbol = @symbol
     q2.attempted = false
     q2.correct = false
     q2.save
@@ -33,6 +49,14 @@ class QuizController < ApplicationController
     q3 = Quiz.new
     q3.firstNum = rndNum.rand(23..29)
     q3.secondNum = rndNum.rand(6..9)
+
+    if rndNum.rand(0..1) == 1
+      @symbol = "+"
+    else
+      @symbol = "-"
+    end
+
+    q3.symbol = @symbol
     q3.attempted = false
     q3.correct = false
     q3.save
@@ -40,6 +64,7 @@ class QuizController < ApplicationController
     #Get first question's data to be displayed
     @firstNum = Quiz.find(Quiz.first.id).firstNum
   	@secondNum = Quiz.find(Quiz.first.id).secondNum
+    @symbol = Quiz.find(Quiz.first.id).symbol
   end
 
   def question1results
@@ -47,7 +72,15 @@ class QuizController < ApplicationController
     @firstNum = Quiz.find(Quiz.first.id).firstNum
     @secondNum = Quiz.find(Quiz.first.id).secondNum
     @q = params[:q].to_i
-    @userAnsweredCorrectly = (@firstNum + @secondNum == @q)
+    @answer = -1
+    @userAnsweredCorrectly = false
+    if Quiz.find(Quiz.first.id).symbol == "+"
+      @answer = @firstNum + @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    else
+      @answer = @firstNum - @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    end
 
     #Update Attempted and Correct
     @question = Quiz.find(Quiz.first.id)
@@ -62,14 +95,24 @@ class QuizController < ApplicationController
     #Get second question's data to be displayed
     @firstNum = Quiz.find(Quiz.first.id+1).firstNum
     @secondNum = Quiz.find(Quiz.first.id+1).secondNum
+    @symbol = Quiz.find(Quiz.first.id+1).symbol
   end
 
   def question2results
     #Check if user answered correctly
     @firstNum = Quiz.find(Quiz.first.id+1).firstNum
     @secondNum = Quiz.find(Quiz.first.id+1).secondNum
+    @answer = -1
     @q = params[:q].to_i
-    @userAnsweredCorrectly = (@firstNum + @secondNum == @q)
+    #TODO: Use Symbol
+    @userAnsweredCorrectly = false
+    if Quiz.find(Quiz.first.id+1).symbol == "+"
+      @answer = @firstNum + @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    else
+      @answer = @firstNum - @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    end
 
     #Update Attempted and Correct
     @question = Quiz.find(Quiz.first.id+1)
@@ -84,14 +127,24 @@ class QuizController < ApplicationController
     #Get third question's data to be displayed
     @firstNum = Quiz.find(Quiz.first.id+2).firstNum
     @secondNum = Quiz.find(Quiz.first.id+2).secondNum
+    @symbol = Quiz.find(Quiz.first.id+2).symbol
   end
 
   def question3results
     #Check if user answered correctly
     @firstNum = Quiz.find(Quiz.first.id+2).firstNum
     @secondNum = Quiz.find(Quiz.first.id+2).secondNum
+    @answer = -1
     @q = params[:q].to_i
-    @userAnsweredCorrectly = (@firstNum + @secondNum == @q)
+    #TODO: Use Symbol
+    @userAnsweredCorrectly = false
+    if Quiz.find(Quiz.first.id+2).symbol == "+"
+      @answer = @firstNum + @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    else
+      @answer = @firstNum - @secondNum
+      @userAnsweredCorrectly = (@answer == @q)
+    end
 
     #Update Attempted and Correct
     @question = Quiz.find(Quiz.first.id+2)
